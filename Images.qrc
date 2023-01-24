@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>SZ-Ybbs-Logo.png</file>
+    </qresource>
+</RCC>
