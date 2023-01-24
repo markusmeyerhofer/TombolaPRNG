@@ -10,13 +10,15 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    prng.cpp \
+    tombola.cpp
 
 HEADERS += \
-    mainwindow.h
+    prng.h \
+    tombola.h
 
 FORMS += \
-    mainwindow.ui
+    tombola.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
