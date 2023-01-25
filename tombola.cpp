@@ -59,21 +59,28 @@ void Tombola::startStop() {
 
 void Tombola::setGUIValues(int currentNumber, int remainingTime, bool finished) {
 
-    ui->resultLCD->display(currentNumber);
-
     if (finished ) {
         QPalette palette = ui->resultLCD->palette();
         palette.setColor(QPalette::WindowText, Qt::red);
         ui->resultLCD->setPalette(palette);
+        ui->resultLCD->display(currentNumber);
+
     } else {
-        QPalette palette = ui->timeLCD->palette();
+        QPalette palette = ui->resultLCD->palette();
         palette.setColor(QPalette::WindowText, textColor);
-        ui->timeLCD->setPalette(palette);
+        ui->resultLCD->setPalette(palette);
+        ui->resultLCD->display(currentNumber);
     }
 
     if (remainingTime < 4 ) {
         QPalette palette = ui->timeLCD->palette();
-        palette.setColor(QPalette::WindowText, Qt::red);
+
+        if (finished) {
+            palette.setColor(QPalette::WindowText, textColor);
+        } else {
+            palette.setColor(QPalette::WindowText, Qt::red);
+        }
+
         ui->timeLCD->setPalette(palette);
     } else {
         QPalette palette = ui->timeLCD->palette();
@@ -83,7 +90,6 @@ void Tombola::setGUIValues(int currentNumber, int remainingTime, bool finished) 
 
     ui->timeLCD->display(remainingTime);
 }
-
 
 void Tombola::on_timeSB_valueChanged() {
     ui->timeLCD->display(ui->timeSB->value());

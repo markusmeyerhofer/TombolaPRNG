@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1387</width>
-    <height>902</height>
+    <width>1291</width>
+    <height>868</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,7 +33,7 @@
      <widget class="QLabel" name="logo">
       <property name="geometry">
        <rect>
-        <x>840</x>
+        <x>920</x>
         <y>40</y>
         <width>301</width>
         <height>251</height>
@@ -98,7 +98,7 @@
        <rect>
         <x>20</x>
         <y>50</y>
-        <width>381</width>
+        <width>521</width>
         <height>231</height>
        </rect>
       </property>
@@ -115,9 +115,9 @@
      <widget class="QLabel" name="yearLabel">
       <property name="geometry">
        <rect>
-        <x>430</x>
+        <x>590</x>
         <y>50</y>
-        <width>271</width>
+        <width>301</width>
         <height>231</height>
        </rect>
       </property>
@@ -139,15 +139,15 @@
      <widget class="QSpinBox" name="rangeSB">
       <property name="geometry">
        <rect>
-        <x>150</x>
-        <y>140</y>
-        <width>311</width>
-        <height>121</height>
+        <x>140</x>
+        <y>150</y>
+        <width>271</width>
+        <height>91</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>76</pointsize>
+        <pointsize>48</pointsize>
         <bold>true</bold>
        </font>
       </property>
@@ -182,13 +182,13 @@
        <rect>
         <x>50</x>
         <y>400</y>
-        <width>231</width>
-        <height>161</height>
+        <width>141</width>
+        <height>91</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>76</pointsize>
+        <pointsize>48</pointsize>
         <bold>true</bold>
        </font>
       </property>
@@ -201,13 +201,13 @@
        <rect>
         <x>40</x>
         <y>50</y>
-        <width>391</width>
+        <width>481</width>
         <height>71</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>48</pointsize>
+        <pointsize>24</pointsize>
         <bold>true</bold>
        </font>
       </property>
@@ -226,7 +226,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>48</pointsize>
+        <pointsize>24</pointsize>
         <bold>true</bold>
        </font>
       </property>
@@ -237,15 +237,15 @@
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>330</x>
-        <y>440</y>
+        <x>230</x>
+        <y>400</y>
         <width>291</width>
         <height>91</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>48</pointsize>
+        <pointsize>24</pointsize>
         <bold>true</bold>
        </font>
       </property>
@@ -256,15 +256,15 @@
      <widget class="QSpinBox" name="yearSpinBox">
       <property name="geometry">
        <rect>
-        <x>51</x>
-        <y>681</y>
+        <x>50</x>
+        <y>610</y>
         <width>261</width>
-        <height>91</height>
+        <height>101</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>76</pointsize>
+        <pointsize>48</pointsize>
         <bold>true</bold>
        </font>
       </property>
@@ -282,14 +282,14 @@
       <property name="geometry">
        <rect>
         <x>50</x>
-        <y>600</y>
+        <y>530</y>
         <width>391</width>
         <height>71</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>48</pointsize>
+        <pointsize>24</pointsize>
         <bold>true</bold>
        </font>
       </property>
@@ -305,8 +305,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1387</width>
-     <height>24</height>
+     <width>1291</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>
