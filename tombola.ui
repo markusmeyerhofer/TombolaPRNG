@@ -6,21 +6,45 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1080</width>
-    <height>1920</height>
+    <width>1060</width>
+    <height>1815</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>1024</width>
+    <height>1024</height>
+   </size>
+  </property>
+  <property name="baseSize">
+   <size>
+    <width>1040</width>
+    <height>1840</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>SZ Tombola 2023</string>
+   <string>SZ Tombola</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="minimumSize">
+    <size>
+     <width>1024</width>
+     <height>1024</height>
+    </size>
+   </property>
+   <property name="baseSize">
+    <size>
+     <width>1040</width>
+     <height>1840</height>
+    </size>
+   </property>
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>1051</width>
-      <height>1871</height>
+      <x>10</x>
+      <y>0</y>
+      <width>1121</width>
+      <height>1741</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -57,7 +81,7 @@
        <rect>
         <x>10</x>
         <y>310</y>
-        <width>1021</width>
+        <width>1011</width>
         <height>651</height>
        </rect>
       </property>
@@ -74,15 +98,15 @@
        </font>
       </property>
       <property name="digitCount">
-       <number>3</number>
+       <number>4</number>
       </property>
      </widget>
      <widget class="QPushButton" name="startStopButton">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>1650</y>
-        <width>1021</width>
+        <y>1560</y>
+        <width>1011</width>
         <height>131</height>
        </rect>
       </property>
@@ -99,10 +123,10 @@
      <widget class="QLCDNumber" name="timeLCD">
       <property name="geometry">
        <rect>
-        <x>310</x>
-        <y>980</y>
-        <width>721</width>
-        <height>661</height>
+        <x>510</x>
+        <y>1000</y>
+        <width>501</width>
+        <height>541</height>
        </rect>
       </property>
       <property name="digitCount">
@@ -212,7 +236,7 @@
        </font>
       </property>
       <property name="value">
-       <number>5</number>
+       <number>10</number>
       </property>
      </widget>
      <widget class="QLabel" name="label_2">
@@ -324,8 +348,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1080</width>
-     <height>21</height>
+     <width>1060</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>
