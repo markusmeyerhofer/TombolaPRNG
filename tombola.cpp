@@ -6,10 +6,10 @@
 using namespace std::chrono;
 
 Tombola::Tombola(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+
     ui->setupUi(this);
     textColor = ui->timeLCD->palette().color(QPalette::WindowText);
     backgroundColor = ui->resultLCD->palette().color(QPalette::Window);
-
 
     ui->timeLCD->display(ui->timeSB->value());
 
@@ -22,8 +22,11 @@ Tombola::Tombola(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) 
     connect(prng, &PRNG::updateGUI, this, &Tombola::setGUIValues);
     connect(prng, &PRNG::startedPRNG, this, &Tombola::generationHasStarted);
     connect(prng, &PRNG::stoppedPRNG, this, &Tombola::generationHasFinished);
+    connect(prng, &PRNG::lotExhaustedError, this, &Tombola::lotExhaustedError);
     connect(this, &Tombola::createRandomNumber, prng, &PRNG::createRandomNumber);
+    connect(this, &Tombola::setRange, prng, &PRNG::setRange);
     connect(this, &Tombola::shutDownGracefully, prng, &PRNG::timerDone);
+    connect(this, &Tombola::reset, prng, &PRNG::reset);
 }
 
 Tombola::~Tombola() {
@@ -45,25 +48,28 @@ void Tombola::generationHasFinished() {
      ui->startStopButton->setText("Start");
 }
 
-
 void Tombola::startStop() {
+
+    emit setRange(ui->rangeSB->value());
 
     if (ui->startStopButton->text() == "Start") {
         ui->startStopButton->setText("Stop");
-        emit createRandomNumber(ui->rangeSB->value(), ui->timeSB->value());
+        emit createRandomNumber(ui->timeSB->value());
     } else {
         ui->startStopButton->setText("Start");
         emit shutDownGracefully();
     }
 }
 
-void Tombola::setGUIValues(int currentNumber, int remainingTime, bool finished) {
+void Tombola::setGUIValues(int currentNumber, int remainingTime, bool finished, QString lots) {
 
-    if (finished ) {
+    if (finished) {
+
         QPalette palette = ui->resultLCD->palette();
         palette.setColor(QPalette::WindowText, Qt::red);
         ui->resultLCD->setPalette(palette);
         ui->resultLCD->display(currentNumber);
+        ui->awardedLotsTF->setText(lots);
 
     } else {
         QPalette palette = ui->resultLCD->palette();
@@ -89,14 +95,38 @@ void Tombola::setGUIValues(int currentNumber, int remainingTime, bool finished) 
     }
 
     ui->timeLCD->display(remainingTime);
+
+}
+
+void Tombola::lotExhaustedError() {
+
+    ui->startStopButton->setText("Start");
+    emit shutDownGracefully();
+    ui->errorLabel->setText("<font color='red'>Error: Alle Lose vergeben!</font>");
+
 }
 
 void Tombola::on_timeSB_valueChanged() {
     ui->timeLCD->display(ui->timeSB->value());
 }
 
-
-void Tombola::on_yearSpinBox_valueChanged() {
-    ui->yearLabel->setText(QString::number(ui->yearSpinBox->value()));
+void Tombola::on_eventTF_textChanged() {
+     ui->eventTextLabel->setText(ui->eventTF->toPlainText());
 }
 
+
+void Tombola::on_rangeSB_valueChanged() {
+    resetLots();
+    emit setRange(ui->rangeSB->value());
+}
+
+
+void Tombola::on_resetLots_clicked() {
+    resetLots();
+}
+
+void Tombola::resetLots() {
+    emit reset();
+    ui->awardedLotsTF->setText("");
+    ui->errorLabel->setText("");
+}

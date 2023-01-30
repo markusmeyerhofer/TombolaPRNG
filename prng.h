@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QTimer>
+#include <random>
 
 class PRNG : public QObject
 {
@@ -14,23 +15,28 @@ public:
 private:
     int randomNumber;
     int remainingTime;
-    bool stopped;
-    int min;
     int max;
+    QList<int> *alreadyAwardedLots;
     QTimer *timer;
     QTimer *stopTimer;
     QTimer *timeCounter;
+    std::mt19937 generator;
+    std::uniform_int_distribution<> range;
+    QString listToString();
 
 signals:
-    void updateGUI(int, int, bool);
+    void updateGUI(int, int, bool, QString);
     void startedPRNG();
     void stoppedPRNG();
+    void lotExhaustedError();
 
 public slots:
-    void createRandomNumber(int, int);
+    void setRange(int);
+    void createRandomNumber(int);
     void runPRNG();
     void timerDone();
     void decreaseTime();
+    void reset();
 
 };
 

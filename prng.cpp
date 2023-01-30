@@ -5,28 +5,39 @@
 using namespace std;
 
 PRNG::PRNG(QObject *parent) : QObject{parent} {
-    min = 1;
-    stopped = true;
     remainingTime = 0;
     randomNumber = 0;
+    alreadyAwardedLots = new QList<int>();
+
+    random_device rd =  random_device();
+    generator = mt19937(rd());
 }
 
 PRNG::~PRNG() {
     delete timer;
     delete stopTimer;
     delete timeCounter;
+    delete alreadyAwardedLots;
 }
 
-void PRNG::createRandomNumber(int max, int time) {
+void PRNG::setRange(int max) {
+    range = uniform_int_distribution(1, max);
+    this->max = max;
+}
+
+void PRNG::createRandomNumber(int time) {
+
+    if (alreadyAwardedLots->size() >= max) {
+        emit lotExhaustedError();
+        return;
+    }
 
     timer = new QTimer(this);
     stopTimer = new QTimer(this);
     timeCounter = new QTimer(this);
 
     remainingTime = time;
-    this->max = max;
-    stopped = false;
-    emit updateGUI(0, time, false);
+    emit updateGUI(0, time, false, listToString());
     emit startedPRNG();
 
     connect(timer, SIGNAL(timeout()), this, SLOT(runPRNG()));
@@ -40,12 +51,12 @@ void PRNG::createRandomNumber(int max, int time) {
 
 void PRNG::runPRNG() {
 
-    random_device rd;
-    mt19937 generator(rd());
-    uniform_int_distribution<> range(min, max);
-
     randomNumber = range(generator);
-    emit updateGUI(randomNumber, remainingTime, false);
+    while (alreadyAwardedLots->contains(randomNumber)) {
+        randomNumber = range(generator);
+    }
+
+    emit updateGUI(randomNumber, remainingTime, false, listToString());
 }
 
 void PRNG::timerDone() {
@@ -53,12 +64,27 @@ void PRNG::timerDone() {
     timer->stop();
     stopTimer->stop();
     timeCounter->stop();
-    stopped = true;
-    emit updateGUI(randomNumber, 0, true);
+    if (alreadyAwardedLots->size() < max) alreadyAwardedLots->append(randomNumber);
+    emit updateGUI(randomNumber, 0, true, listToString());
     emit stoppedPRNG();
 }
 
 void PRNG::decreaseTime() {
 
     remainingTime--;
+}
+
+QString PRNG::listToString() {
+
+    QString outString;
+    for(int i=0; i<alreadyAwardedLots->size(); i++)
+    {
+        outString += QString::number(alreadyAwardedLots->at(i));
+        if(i<alreadyAwardedLots->size()-1) outString += ", " ;
+    }
+    return outString;
+}
+
+void PRNG::reset() {
+    alreadyAwardedLots->clear();
 }

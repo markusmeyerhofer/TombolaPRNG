@@ -22,23 +22,27 @@ private:
     PRNG *prng;
     QColor textColor;
     QColor backgroundColor;
+    Ui::MainWindow *ui;
+    int max;
 
 private slots:
     void startStop();
-    void setGUIValues(int, int, bool);
+    void setGUIValues(int, int, bool, QString);
     void generationHasStarted();
     void generationHasFinished();
+    void resetLots();
+    void lotExhaustedError();
     void on_timeSB_valueChanged();
-    void on_yearSpinBox_valueChanged();
-
-private:
-    Ui::MainWindow *ui;
-    int min;
-    int max;
+    void on_eventTF_textChanged();
+    void on_rangeSB_valueChanged();
+    void on_resetLots_clicked();
 
 signals:
-    void createRandomNumber(int, int);
+    void runPRNG();
+    void createRandomNumber(int);
+    void setRange(int);
     void shutDownGracefully();
+    void reset();
 
 };
 #endif // TOMBOLA_H
