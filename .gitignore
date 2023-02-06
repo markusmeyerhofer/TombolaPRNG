@@ -1,3 +1,8 @@
+#Qt stuff
+
+.qtc*
+
+
 # Mac Stuff
 .DS_Store
 .DS_Store?
